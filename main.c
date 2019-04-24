@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 int i; 
-int key = 14; // how much the array will move
-char A2Z[] = "KWZZ HVWG KCFY DZSOGS?!"; //first array
+int key = 15; // how much the array will move
+char A2Z[] = "WX BJB & SPS, NDJ'GT IWT QTHI"; //first array
 
 
 int main()
