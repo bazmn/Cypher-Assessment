@@ -1,93 +1,145 @@
 #include <stdio.h>
 #include <stdlib.h>
-int i; 
+int i = 0; 
 int crash = 0;
 int Switch = 0;
+int temp = 0;
+char ALPHA[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//////////////////////////////// HARD CODE BELOW ////////////////////////////////////////
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+int key = 2; // The Cesar Cyper key
+char SubsitutionKEY[] = "LMNOPQRSTUVWXYZABCDEFGHIJK";//the substitution key (Must be capitalised)
+char Input[]= "RNGCUG NGV VJKU YQTM"; //Users input to be made into a Cypher
 
-int key = 2; // how much the array will move
-char A2Z[]= "WX BJB & SPS, NDJ'GT IWT QTHI"; //first array
-
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//////////////////////////////// HARD CODE ABOVE ////////////////////////////////////////
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 int main()
 {
-    printf("Type 1 for Cesar Cyper Incryption\nType 2 for Cesar Cyper Decyption with known key\nType 3 for Cesar Cyper Decyption with unknown key\n");
+    printf("Type 1 for Cesar Cyper Incryption\nType 2 for Cesar Cyper Decyption with known key\nType 3 for Cesar Cyper Decyption with unknown key\nType 4 for Subsitution Cyper Encyption\n");
     scanf("%d", &Switch);
     //printf("Enter code: ");
-    //scanf("%c", &A2Z[400]);
-    int dkey = 26 - key;    
+    //scanf("%c", &Input[400]);
+        
 
 
     switch(Switch){
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//////////////////////////////// CESAR ENCRYPTION ////////////////// //////////////////////
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         case 1:{
-            for (i = 0; A2Z[i] != '\0'; i++){ // starting a counter for how ever large A2Z is
-            //printf("%c, %d, --> %c, %d\n", A2Z[i] , A2Z[i], A2Z[i]+key , A2Z[i]+key); // displays what is happeing in the workings of the code
-            //printf("%s\n", A2Z);
-                if(A2Z[i] >= 97 && A2Z[i] <= 122){
-                    A2Z[i]= A2Z[i] - 32; // making sure all characters are upper case
+            for (i = 0; Input[i] != '\0'; i++){ // starting a counter for how ever large Input is
+            //printf("%c, %d, --> %c, %d\n", Input[i] , Input[i], Input[i]+key , Input[i]+key); // displays what is happeing in the workings of the code
+            //printf("%s\n", Input);
+                if(Input[i] >= 97 && Input[i] <= 122){
+                    Input[i]= Input[i] - 32; // making sure all characters are upper case
                 }
             
-                if(A2Z[i] >= 65 && A2Z[i] <= 90){ // Only change Uppercase letter caracters to keep punctuation  
-                    A2Z[i] = A2Z[i] + key; //adds the key to the char in the array at [i]
+                if(Input[i] >= 65 && Input[i] <= 90){ // Only change Uppercase letter caracters to keep punctuation  
+                    Input[i] = Input[i] + key; //adds the key to the char in the array at [i]
         
-                    if(A2Z[i] > 'Z'){ // if statement regarding looping (if it goes past z it will go back to a)
-                        A2Z[i]= A2Z[i] - 26;
+                    if(Input[i] > 'Z'){ // if statement regarding looping (if it goes past z it will go back to a)
+                        Input[i]= Input[i] - 26;
                     }
                 }
             }
-        printf("%s\n", A2Z);   
+        printf("%s\n", Input);   
         }
             break; // Jump out of switch()
-        
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//////////////////////////////// CESAR DECRYPTION ////////////////////////////////////////
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         case 2:{ // Jumped to if x == 2
             //printf("Enter code: ");
-            //scanf("%s", &A2Z);
-            for (i = 0; A2Z[i] != '\0'; i++){ // starting a counter for how ever large A2Z is       
-                //printf("%c, %d, --> %c, %d\n", A2Z[i] , A2Z[i], A2Z[i]+key , A2Z[i]+key); // displays what is happeing in the workings of the code
-                //printf("%s\n", A2Z);
-                if(A2Z[i] >= 97 && A2Z[i] <= 122){
-                    A2Z[i]= A2Z[i] - 32; // making sure all characters are upper case
+            //scanf("%s", &Input);
+            int dkey = 26 - key;
+            for (i = 0; Input[i] != '\0'; i++){ // starting a counter for how ever large Input is       
+                //printf("%c, %d, --> %c, %d\n", Input[i] , Input[i], Input[i]+key , Input[i]+key); // displays what is happeing in the workings of the code
+                //printf("%s\n", Input);
+                if(Input[i] >= 97 && Input[i] <= 122){
+                    Input[i]= Input[i] - 32; // making sure all characters are upper case
                 }
                 
-                if(A2Z[i] >= 65 && A2Z[i] <= 90){ // Only change Uppercase letter caracters to keep punctuation  
-                    A2Z[i] = A2Z[i] + dkey; //adds the key to the char in the array at [i]
+                if(Input[i] >= 65 && Input[i] <= 90){ // Only change Uppercase letter caracters to keep punctuation  
+                    Input[i] = Input[i] + dkey; //adds the key to the char in the array at [i]
             
-                    if(A2Z[i] > 'Z'){ // if statement regarding looping (if it goes past z it will go back to a)
-                        A2Z[i]= A2Z[i] - 26;
+                    if(Input[i] > 'Z'){ // if statement regarding looping (if it goes past z it will go back to a)
+                        Input[i]= Input[i] - 26;
                     }
                 }
             }
     
-        printf("%s\n", A2Z);
+        printf("%s\n", Input);
         
         }
             break;
-            
-        case 3:{ // Jumped to if x == 2
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//////////////////////////////// CESAR DECRYPTION WITH NO KEY////////////////////////
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~           
+        case 3:{
             //printf("Enter code: ");
-            //scanf("%s", &A2Z);
+            //scanf("%s", &Input);
             for (crash = 0; crash <= 26; crash++){  
-                for (i = 0; A2Z[i] != '\0'; i++){ // starting a counter for how ever large A2Z is                   
-                            //printf("%c, %d, -->+%d--> %c, %d\n", A2Z[i] , A2Z[i], key, A2Z[i]+key , A2Z[i]+key); // displays what is happeing in the workings of the code
-                            //printf("%s\n", A2Z);
-                    if(A2Z[i] >= 97 && A2Z[i] <= 122){
-                        A2Z[i]= A2Z[i] - 32; // making sure all characters are upper case
+                for (i = 0; Input[i] != '\0'; i++){ // starting a counter for how ever large Input is                   
+                            //printf("%c, %d, -->+%d--> %c, %d\n", Input[i] , Input[i], key, Input[i]+key , Input[i]+key); // displays what is happeing in the workings of the code
+                            //printf("%s\n", Input);
+                    if(Input[i] >= 97 && Input[i] <= 122){
+                        Input[i]= Input[i] - 32; // making sure all characters are upper case
                     }
                     
-                    if(A2Z[i] >= 65 && A2Z[i] <= 90){ // Only change Uppercase letter caracters to keep punctuation  
-                        A2Z[i] = A2Z[i] + 1; //adds the key to the char in the array at [i]
+                    if(Input[i] >= 65 && Input[i] <= 90){ // Only change Uppercase letter caracters to keep punctuation  
+                        Input[i] = Input[i] + 1; //adds the key to the char in the array at [i]
                         
-                        if(A2Z[i] > 'Z'){ // if statement regarding looping (if it goes past z it will go back to a)
-                            A2Z[i]= A2Z[i] - 26;
+                        if(Input[i] > 'Z'){ // if statement regarding looping (if it goes past z it will go back to a)
+                            Input[i]= Input[i] - 26;
                         }
                     }
                 }
                 
-            printf("%s\n", A2Z);
+            printf("%s\n", Input);
             }
         }
+            break;
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//////////////////////////////// SUBSITUTION ENCRYPTION ////////////////////////
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~           
+      
+        case 4:{
+            while(Input[i] != '\0'){ //While the code still has letters to convert
+    
+         if(Input[i] >= 97 && Input[i] <= 122){
+                    Input[i]= Input[i] - 32; // making sure all characters are upper case
+                }
+                
+        if(Input[i] < 65 || Input[i] > 90){ //if the Input isn't a capital letter then leave it be  
+                Input[i] = Input[i];//move onto the next figure, leave punctuation
+                i++;
+            }
+
+        
+        if(Input[i] == ALPHA[temp]){ //only if the letter of code matches the letter of A2Z
+                Input[i] = SubsitutionKEY[temp]; //Change the letter of the code to they key
+                i++; //Move to the next letter
+                temp = 0; // Reset the temp
+                //printf("%s\n", code);
+        }
+        
+        else {
+            //printf("%d NOPE\n", temp);
+            temp++; //If the code doesn't match the alphabet, move onto the next letter untill it does
+        }
+
+    }
+    
+    printf("%s", Input);
+            
+        }
+
             break;
             
         default: return (0); // Jumped to if nothing
