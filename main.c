@@ -12,7 +12,7 @@ char ALPHA[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 int key = 2; // The Cesar Cyper key
 char SubsitutionKEY[] = "LMNOPQRSTUVWXYZABCDEFGHIJK";//the substitution key (Must be capitalised)
-char Input[]= "RNGCUG NGV VJKU YQTM"; //Users input to be made into a Cypher
+char Input[]= "HSJ SPWWZ ESPCP"; //Users input to be made into a Cypher
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //////////////////////////////// HARD CODE ABOVE ////////////////////////////////////////
@@ -21,7 +21,7 @@ char Input[]= "RNGCUG NGV VJKU YQTM"; //Users input to be made into a Cypher
 
 int main()
 {
-    printf("Type 1 for Cesar Cyper Incryption\nType 2 for Cesar Cyper Decyption with known key\nType 3 for Cesar Cyper Decyption with unknown key\nType 4 for Subsitution Cyper Encyption\n");
+    printf("Type 1 for Cesar Cyper Incryption\nType 2 for Cesar Cyper Decyption with known key\nType 3 for Cesar Cyper Decyption with unknown key\nType 4 for Substitution Cyper Encyption\nType 5 for Substitution Cyper Decryption\n");
     scanf("%d", &Switch);
     //printf("Enter code: ");
     //scanf("%c", &Input[400]);
@@ -112,18 +112,55 @@ int main()
         case 4:{
             while(Input[i] != '\0'){ //While the code still has letters to convert
     
+                 if(Input[i] >= 97 && Input[i] <= 122){
+                            Input[i]= Input[i] - 32; // making sure all characters are upper case
+                        }
+                        
+                if(Input[i] < 65 || Input[i] > 90){ //if the Input isn't a capital letter then leave it be  
+                        Input[i] = Input[i];//move onto the next figure, leave punctuation
+                        i++;
+                    }
+        
+                
+                if(Input[i] == ALPHA[temp]){ //only if the letter of code matches the letter of A2Z
+                        Input[i] = SubsitutionKEY[temp]; //Change the letter of the code to they key
+                        i++; //Move to the next letter
+                        temp = 0; // Reset the temp
+                        //printf("%s\n", code);
+                }
+                
+                else {
+                    //printf("%d NOPE\n", temp);
+                    temp++; //If the code doesn't match the alphabet, move onto the next letter untill it does
+                }
+
+            }
+    
+            printf("%s", Input);
+            
+        }
+
+            break;
+        
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//////////////////////////////// SUBSITUTION DECRYPTION ////////////////////////
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~           
+
+        case 5:{
+            while(Input[i] != '\0'){ //While the code still has letters to convert
+    
          if(Input[i] >= 97 && Input[i] <= 122){
                     Input[i]= Input[i] - 32; // making sure all characters are upper case
                 }
                 
-        if(Input[i] < 65 || Input[i] > 90){ //if the Input isn't a capital letter then leave it be  
+        if(Input[i] < 65 || Input[i] > 90){ //if the code isn't a capital letter then leave it be  
                 Input[i] = Input[i];//move onto the next figure, leave punctuation
                 i++;
             }
 
         
-        if(Input[i] == ALPHA[temp]){ //only if the letter of code matches the letter of A2Z
-                Input[i] = SubsitutionKEY[temp]; //Change the letter of the code to they key
+        if(Input[i] == SubsitutionKEY[temp]){ //only if the letter of code matches the letter of A2Z
+                Input[i] = ALPHA[temp]; //Change the letter of the code to they key
                 i++; //Move to the next letter
                 temp = 0; // Reset the temp
                 //printf("%s\n", code);
@@ -131,16 +168,18 @@ int main()
         
         else {
             //printf("%d NOPE\n", temp);
-            temp++; //If the code doesn't match the alphabet, move onto the next letter untill it does
+            temp++; //If the Input doesn't match the alphabet, move onto the next letter untill it does
         }
 
     }
     
     printf("%s", Input);
-            
-        }
+    
+}
 
             break;
+            
+            
             
         default: return (0); // Jumped to if nothing
     
